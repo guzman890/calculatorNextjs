@@ -65,3 +65,7 @@ export const loginAction = async (formData: FormData) => {
   await login(formData);
   redirect("/operations");
 }
+
+export async function goRecord() {
+  redirect("/record");
+}
