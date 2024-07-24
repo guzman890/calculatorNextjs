@@ -49,22 +49,23 @@ export function OperationListClient() {
     return (
       
       <div className="md:container md:mx-auto flex min-h-screen justify-center items-center">
-      {!isNewOperation ? (
-        <div >
+        <div className="flex flex-col w-full gap-4">
           <button
-          onClick={() => goRecord()}
-            className={buttonClassNames}
-          >
-            All Records
+            onClick={() => goRecord()}
+              className={buttonClassNames}
+            >
+              All Records
           </button>
-
+        </div>
+        
+      {!isNewOperation ? (
+          
           <button
             onClick={() => setIsNewOperation(true)}
             className={buttonClassNames}
           >
             New Operation
           </button>
-        </div>  
       ) : (
         <div className="flex flex-col w-full gap-4">
           {operations.map((operation: Operation) => (
