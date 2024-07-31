@@ -9,8 +9,7 @@ export async function login(formData: FormData) {
     password: formData.get("password") ?? "-"
   };
 
-  console.log("init responseLogin")
-  console.log("user", JSON.stringify(user))
+
   try {
       const response = await fetch("http://3.15.196.64/login", {
       method: "POST",
@@ -27,7 +26,6 @@ export async function login(formData: FormData) {
     var authorizationToken = response.headers.get("authorization");
       
     var data = await response.json();
-    console.log("data", data)
 
     const session = {  'user': data};
     cookies().set("session", JSON.stringify(session), {
@@ -40,16 +38,13 @@ export async function login(formData: FormData) {
     });
 
   } catch (error) {
-    console.error("Failed to fetch login:", error);
     redirect("/login");
   }
 
 }
 
 export async function logoutAction() {
-  console.log("logoutAction");
-  // cookies().set("session", "", { expires: new Date(0) });
-  // document.cookie = 'session=; Max-Age=0'
+
   cookies().delete('session')
   cookies().delete('token')
   redirect("/");

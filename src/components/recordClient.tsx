@@ -35,11 +35,6 @@ export default function RecordClient({
   const [records, setRecords] = useState<Record[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
-
-
-  console.log("RecordsListClient ->", records);
-
   const rowsPerPage = 10;
 
   const [totalPages, setTotalPages] = useState(0);
@@ -53,7 +48,6 @@ export default function RecordClient({
           return rcrd;
         });
         setRecords(flattenedRecords);
-        console.log("RecordsListClient ->", flattenedRecords);
         setTotalPages(result.totalPages)
         setRecords(flattenedRecords);
         setIsLoading(false);

@@ -1,5 +1,6 @@
 "use server";
 
+import { stat } from "fs";
 import { cookies } from "next/headers";
 
 export default async function getTime(
@@ -61,7 +62,7 @@ export async function getRecords( page: number, rowsPerPage: number) {
     console.log("getOperations: user ->", session.user);
     console.log("getOperations: token ->", token.token);
     
-    const response = await fetch("http://3.15.196.64/records/page?page="+(page-1)+"&size="+rowsPerPage+"&sort=date,asc", {
+    const response = await fetch("http://3.15.196.64/records/page?page="+(page-1)+"&size="+rowsPerPage+"&sort=date,desc", {
       headers: {
         Authorization:
           "Bearer "+ token.token,
@@ -97,8 +98,13 @@ export async function getOperationResult(
       },
       body: JSON.stringify({'operationId': id, 'userId': session.user.id, value:[firstValue, secondValue]}),
     });
+
+    if (response.status === 400) {
+      const erroData = await response.text();
+      return { operationResponse: erroData, status: response.status };
+    }
+
     const data = await response.json();
-    console.log("Data getOperationResult->", data);
 
     const responseUser = await fetch("http://3.15.196.64/users/"+session.user.id, {
       headers: {
@@ -107,7 +113,6 @@ export async function getOperationResult(
       },
     });
     const currentUser = await responseUser.json();
-    console.log("currentUser", currentUser)
     const newSession = {  'user': currentUser };
 
     cookies().set("session", JSON.stringify(newSession), {

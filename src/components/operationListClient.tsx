@@ -26,16 +26,13 @@ export function OperationListClient() {
 
   useEffect(() => {
     const fetchOperations = async () => {
-      console.log("fetchOperations working");
       const result = await getOperations();
       setOperations(result);
       setIsLoading(false);
-      console.log("fetchOperation - after getOperations");
     };
     fetchOperations();
   }, []);
 
-  console.log("OperationListClient rendering");
 
   const Loading = () => {
     return (
@@ -48,7 +45,7 @@ export function OperationListClient() {
   const List = () => {
     return (
       
-      <div className="md:container md:mx-auto flex min-h-screen justify-center items-center">
+      <div className="md:container md:mx-auto flex min-h-screen justify-center items-center gap-4">
         <div className="flex flex-col w-full gap-4">
           <button
             onClick={() => goRecord()}

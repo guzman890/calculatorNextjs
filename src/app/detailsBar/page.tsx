@@ -1,4 +1,5 @@
 import { logoutAction } from "@/app/lib/actions";
+import BackClient from "@/components/backClient";
 import { cookies } from "next/headers";
 
 type SessionType = {
@@ -16,6 +17,9 @@ const DetailsBar = async () => {
         <div className="container mx-auto px-4 h-full ">
           <div className="flex justify-end items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white ">
+              <li>
+                <BackClient />
+              </li>
               <li>
                 <p>{session.username}</p>
               </li>
