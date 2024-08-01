@@ -2,11 +2,6 @@ import { logoutAction } from "@/app/lib/actions";
 import BackClient from "@/components/backClient";
 import { cookies } from "next/headers";
 
-type SessionType = {
-  user: {
-    email: string;
-  };
-};
 
 const DetailsBar = async () => {
   const session = JSON.parse(cookies().get("session")?.value|| "{}")?.user;
@@ -14,9 +9,9 @@ const DetailsBar = async () => {
   return (
     <>
       <div className="w-full h-20 bg-emerald-800 sticky top-0">
-        <div className="container mx-auto px-4 h-full ">
-          <div className="flex justify-end items-center h-full">
-            <ul className="hidden md:flex gap-x-6 text-white ">
+        <div className="container mx-auto h-full">
+          <div className="flex justify-end items-center h-full px-4">
+            <ul className="flex gap-x-6">
               <li>
                 <BackClient />
               </li>

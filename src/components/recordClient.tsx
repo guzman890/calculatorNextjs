@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   Table,
@@ -23,7 +23,7 @@ interface Record {
   operation: {
     id: number;
     label: string;
-  }
+  };
 }
 
 export default function RecordClient({
@@ -39,23 +39,20 @@ export default function RecordClient({
 
   const [totalPages, setTotalPages] = useState(0);
 
-
   useMemo(() => {
     const fetchRecords = async () => {
-        const result = await getRecords(page,rowsPerPage);
-        const flattenedRecords = result.content.map((rcrd:Record) => {
-          rcrd.label = rcrd.operation.label
+      const result = await getRecords(page, rowsPerPage);
+      const flattenedRecords = result.content.map((rcrd: Record) => {
+        rcrd.label = rcrd.operation.label;
           return rcrd;
         });
         setRecords(flattenedRecords);
-        setTotalPages(result.totalPages)
+      setTotalPages(result.totalPages);
         setRecords(flattenedRecords);
         setIsLoading(false);
       };
       fetchRecords();
-    }, 
-    [setRecords,setPage,page]
-  );
+  }, [setRecords, page]);
 
   return (
     <>
@@ -67,13 +64,11 @@ export default function RecordClient({
           aria-label="Records Client"
           bottomContent={
             totalPages > 0 ? (
-              <div className="flex w-full justify-center flex-wrap gap-4 items-center">
+                <div className="flex w-full justify-center flex-wrap gap-4 items-center bg-gray-900 rounded">
                 <Pagination
-                  isCompact
+                    className="overflow-hidden"
                   showControls
                   showShadow
-                  size="lg"
-                  color="primary"
                   variant="bordered"
                   page={page}
                   total={totalPages}
@@ -96,7 +91,10 @@ export default function RecordClient({
             <TableColumn className="bg-indigo-500 text-2xl" key="userBalance">
               User Balance
             </TableColumn>
-            <TableColumn className="bg-indigo-500 text-2xl" key="operationResponse">
+              <TableColumn
+                className="bg-indigo-500 text-2xl "
+                key="operationResponse"
+              >
               Operation Response
             </TableColumn>
           </TableHeader>
