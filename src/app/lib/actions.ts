@@ -11,7 +11,7 @@ export async function login(formData: FormData) {
 
 
   try {
-      const response = await fetch("http://3.15.196.64/login", {
+      const response = await fetch("http://3.23.95.102/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

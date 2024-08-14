@@ -39,7 +39,7 @@ export async function getOperations() {
     console.log("getOperations: user ->", session.user);
     console.log("getOperations: token ->", token.token);
 
-    const response = await fetch("http://3.15.196.64/operations", {
+    const response = await fetch("http://3.23.95.102/operations", {
       headers: {
         Authorization:
           "Bearer "+ token.token,
@@ -62,7 +62,7 @@ export async function getRecords( page: number, rowsPerPage: number) {
     console.log("getOperations: user ->", session.user);
     console.log("getOperations: token ->", token.token);
     
-    const response = await fetch("http://3.15.196.64/records/page?page="+(page-1)+"&size="+rowsPerPage+"&sort=date,desc", {
+    const response = await fetch("http://3.23.95.102/records/page?page="+(page-1)+"&size="+rowsPerPage+"&sort=date,desc", {
       headers: {
         Authorization:
           "Bearer "+ token.token,
@@ -90,7 +90,7 @@ export async function getOperationResult(
 
     console.log("firstValue ->", firstValue, "secondValue ->", secondValue, "id ->", id);
     console.log(JSON.stringify({'operationId': id, 'userId': session.user.id, value:[firstValue, secondValue]}))
-    const response = await fetch("http://3.15.196.64/records", {
+    const response = await fetch("http://3.23.95.102/records", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export async function getOperationResult(
 
     const data = await response.json();
 
-    const responseUser = await fetch("http://3.15.196.64/users/"+session.user.id, {
+    const responseUser = await fetch("http://3.23.95.102/users/"+session.user.id, {
       headers: {
         Authorization:
           "Bearer "+ token.token,
