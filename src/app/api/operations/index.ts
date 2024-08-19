@@ -3,35 +3,6 @@
 import { stat } from "fs";
 import { cookies } from "next/headers";
 
-export default async function getTime(
-  firstValue: any,
-  secondValue: any,
-  id: any
-) {
-  try {
-    const response = await fetch(
-      "https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires",
-      {
-        next: {
-          revalidate: 3,
-        },
-      }
-    );
-    const data = await response.json();
-
-    console.log(
-      "firstValue ->",firstValue,
-      "secondValue ->",secondValue,
-      "id ->",id
-    );
-    console.log(data.datetime);
-
-    return data.datetime;
-  } catch (error) {
-    console.error("Failed to fetch random string:", error);
-  }
-}
-
 export async function getOperations() {
   try {
     const session = JSON.parse(cookies().get("session")?.value|| "");
